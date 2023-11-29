@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, Float
 from sqlalchemy.orm import relationship
 from app.schemas import UserInDB
 
@@ -13,6 +13,11 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
+    age = Column(Integer, index=True)
+    weight = Column(Float, index=True)
+    height = Column(Float, index=True)
+    gender = Column(String, index=True)
+    activity_level = Column(Integer, index=True)
     relationship()
 
     def to_schema(self):

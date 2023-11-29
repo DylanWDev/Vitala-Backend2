@@ -9,6 +9,12 @@ class UserBase(BaseModel):
     is_active: Optional[bool] = True
     is_superuser: bool = False
     username: Optional[str] = None
+    age: Optional[int] = None
+    weight: Optional[float] = None
+    height: Optional[float] = None
+    gender: Optional[str] = None
+    activity_level: Optional[int] = None
+
 
 
 # Properties to receive via API on creation
