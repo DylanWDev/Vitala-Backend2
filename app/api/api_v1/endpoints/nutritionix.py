@@ -6,7 +6,7 @@ from app.schemas.nutritionix_foods import NutritionixSchema
 from app.api import deps
 from app import controllers, models, schemas
 from app.db import session
-from app.controllers.NutritionixController import NutritionixController
+from app.controllers.FoodLogController import NutritionixController
 
 
 

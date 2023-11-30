@@ -1,4 +1,4 @@
 from .user import User
 from .token import Token
-from .nutritionix_foods import Nutritionix
-from .meal_log import MealLogs
+from .food_log import FoodLog
+from .user_to_foods import UsersToFoods

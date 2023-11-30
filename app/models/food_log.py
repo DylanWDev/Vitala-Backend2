@@ -2,11 +2,11 @@ from sqlalchemy import Boolean, Column, Integer, String, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship, Mapped, relationships, mapped_column
 from app.schemas import UserInDB
 from typing import List
-
+# from app.models.user import User
 from app.db.base_class import Base
 
 class FoodLog(Base):
-    __tablename__ = "meal_logs"
+    __tablename__ = "food_log"
 
     id = Column(Integer, primary_key=True, index=True)
     meal_type = Column(String, index=True)
@@ -24,13 +24,12 @@ class FoodLog(Base):
 
 
 
-
     class UsersToFoods(Base):
         __tablename__ = "users_to_foods"
 
         id: Mapped[int] = mapped_column(primary_key=True, index=True)
-        user_id: Mapped[int] = mapped_column(ForeignKey(user.id))
-        food_id: Mapped[int] = mapped_column(ForeignKey(food_log.id))
+        user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+        food_id: Mapped[int] = mapped_column(ForeignKey("food_log.id"))
 
-        user: Mapped[List["User"]] = relationship(back_populates="pivot")
+        users: Mapped[List["User"]] = relationship(back_populates="pivot")
         pivot: Mapped[List["FoodLog"]] = relationship(back_populates="food")
