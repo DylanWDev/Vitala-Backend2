@@ -1,10 +1,9 @@
-from sqlalchemy import Boolean, Column, Integer, String, Float, ForeignKey, Date
-from sqlalchemy.orm import relationship
-from app.schemas import UserInDB
+from sqlalchemy import Column, Integer, String, Float
+
 
 from app.db.base_class import Base
 
-class Nutritonix(Base):
+class Nutritionix(Base):
     __tablename__ = "nutritionix_foods"
 
     id = Column(Integer, primary_key=True, index=True)
