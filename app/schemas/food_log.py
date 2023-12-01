@@ -3,7 +3,6 @@ from typing import Optional
 from datetime import datetime
 
 class FoodLogSchema(BaseModel):
-    id: Optional[int]
     meal_type: str
     servings: float
     date_logged: datetime
@@ -17,3 +16,6 @@ class FoodLogSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class FoodLogInDBSchema (FoodLogSchema):
+    id: int

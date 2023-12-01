@@ -1,20 +1,17 @@
 from fastapi import Depends, HTTPException, status, APIRouter
 from sqlalchemy.orm import Session
-from app.controllers import FoodLogController
-from app.models import FoodLog
-from app.schemas.food_log import FoodLogSchema
-from app.models.user import User
 from app.api import deps
 from app.api.deps import get_current_user
-
+from app import controllers, models, schemas
 
 router = APIRouter()
 
 
-@router.post("/foodlog", response_model=FoodLogSchema)
+@router.post("/foodlog", response_model=schemas.FoodLogSchema)
 def create_food_log(
-    food_log: FoodLogSchema,
+    food_log: schemas.FoodLogSchema,
     db: Session = Depends(deps.get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: models.User = Depends(get_current_user),
 ):
-    return FoodLogController.create_food_log(db, food_log, current_user.id)
+    result = controllers.flc.create_food_log(db, obj_in=schemas.FoodLogSchema)
+    return result
