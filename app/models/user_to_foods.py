@@ -7,6 +7,7 @@ from app.db.base_class import Base
 
 class UsersToFoods(Base):
         __tablename__ = "users_to_foods"
+        
 
         id: Mapped[int] = mapped_column(primary_key=True, index=True)
         user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))

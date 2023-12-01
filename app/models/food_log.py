@@ -24,12 +24,12 @@ class FoodLog(Base):
 
 
 
-    class UsersToFoods(Base):
-        __tablename__ = "users_to_foods"
+    # class UsersToFoods(Base):
+    #     __tablename__ = "users_to_foods"
 
-        id: Mapped[int] = mapped_column(primary_key=True, index=True)
-        user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-        food_id: Mapped[int] = mapped_column(ForeignKey("food_log.id"))
+    #     id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    #     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    #     food_id: Mapped[int] = mapped_column(ForeignKey("food_log.id"))
 
-        users: Mapped[List["User"]] = relationship(back_populates="pivot")
-        pivot: Mapped[List["FoodLog"]] = relationship(back_populates="food")
+    #     users: Mapped[List["User"]] = relationship(back_populates="pivot")
+    #     pivot: Mapped[List["FoodLog"]] = relationship(back_populates="food")
