@@ -1,6 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, Float, ForeignKey, DateTime, VARCHAR
 from sqlalchemy.orm import relationship, Mapped, relationships, mapped_column
 from typing import List
+from datetime import datetime
 from app.schemas.food_log import FoodLogSchema
 
 from app.db.base_class import Base
@@ -11,7 +12,7 @@ class FoodLog(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True, autoincrement=True)
     meal_type: Mapped[str] = mapped_column(String, index=True)
     servings: Mapped[float] = mapped_column(Float, index=True)
-    date_logged: Mapped[DateTime] = mapped_column(DateTime, index=True)
+    date_logged: Mapped[datetime] = mapped_column(DateTime, index=True)
     calories: Mapped[float] = mapped_column(Float, index=True)
     protein: Mapped[float] = mapped_column(Float, index=True)
     carbs: Mapped[float] = mapped_column(Float, index=True)
@@ -27,6 +28,7 @@ class FoodLog(Base):
     def to_schema(self):
         return FoodLogSchema(
             id=self.id,
+            meal_type=self.meal_type,
             servings=self.servings,
             date_logged=self.date_logged,
             calories=self.calories,

@@ -1,8 +1,14 @@
 -- DROP TABLE "alembic_version";
 
--- DROP TABLE "tokens";
+-- DROP TABLE "food_log";
 
--- DROP TABLE "users";
+-- DROP TABLE "tokens";
 
 -- UPDATE users SET is_superuser = True
 -- WHERE users.id = 4;
+
+
+
+
+
+
