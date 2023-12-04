@@ -1,6 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, Float
 from sqlalchemy.orm import relationship, Mapped
-from app.schemas import UserInDB
 from typing import List
 
 from app.db.base_class import Base
