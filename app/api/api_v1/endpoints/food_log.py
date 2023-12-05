@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post("/", response_model=schemas.FoodLogSchema)
 def create_food_log(
     *,
-    food_log: schemas.FoodLogSchema,
+    food_log: schemas.FoodLogBase,
     db: Session = Depends(deps.get_db),
     # current_user: models.User = Depends(deps.get_current_user),
 ):

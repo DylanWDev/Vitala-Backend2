@@ -14,7 +14,6 @@ class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate])
             protein=obj_in.protein,
             carbs=obj_in.carbs,
             fats = obj_in.fats,
-            water=obj_in.water,
             serving_unit=obj_in.serving_unit,
             serving_weight_grams=obj_in.serving_weight_grams
 

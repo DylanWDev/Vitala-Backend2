@@ -4,11 +4,16 @@
 
 -- DROP TABLE "tokens";
 
--- UPDATE users SET is_superuser = True
+-- UPDATE food_logs SET meal_type int
+
 -- WHERE users.id = 4;
 
 
 
+
+
+ALTER TABLE food_logs
+DROP COLUMN water;
 
 
 

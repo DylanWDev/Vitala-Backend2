@@ -17,7 +17,6 @@ class FoodLog(Base):
     protein: Mapped[float] = mapped_column(Float, index=True)
     carbs: Mapped[float] = mapped_column(Float, index=True)
     fats: Mapped[float] = mapped_column(Float, index=True)
-    water: Mapped[float] = mapped_column(Float, index=True)
     serving_unit: Mapped[str] = mapped_column(VARCHAR, index=True)
     serving_weight_grams: Mapped[int] = mapped_column(Integer, index=True)
 
@@ -35,7 +34,6 @@ class FoodLog(Base):
             protein=self.protein,
             carbs=self.carbs,
             fats=self.fats,
-            water=self.water,
             serving_unit=self.serving_unit,
             serving_weight_grams=self.serving_weight_grams
         )
