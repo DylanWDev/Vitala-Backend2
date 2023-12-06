@@ -18,6 +18,7 @@ class User(Base):
     height = Column(Float, index=True)
     gender = Column(String, index=True)
     activity_level = Column(Integer, index=True)
+    health_goals = Column(String, index=True)
 
     pivot: Mapped[List["UsersToFoods"]] = relationship(back_populates="users")
 

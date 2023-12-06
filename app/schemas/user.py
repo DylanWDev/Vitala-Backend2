@@ -14,6 +14,7 @@ class UserBase(BaseModel):
     height: Optional[float] = None
     gender: Optional[str] = None
     activity_level: Optional[int] = None
+    health_goals: Optional[int] = None
 
 
 

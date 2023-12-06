@@ -15,7 +15,8 @@ class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate])
             carbs=obj_in.carbs,
             fats = obj_in.fats,
             serving_unit=obj_in.serving_unit,
-            serving_weight_grams=obj_in.serving_weight_grams
+            serving_weight_grams=obj_in.serving_weight_grams,
+            food_name=obj_in.food_name
 
         )
         db.add(food_log_obj)

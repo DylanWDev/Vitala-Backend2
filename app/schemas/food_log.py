@@ -12,6 +12,7 @@ class FoodLogBase(BaseModel):
     fats: Optional[float] = None
     serving_unit: Optional[str] = None
     serving_weight_grams: Optional[int] = None
+    food_name: Optional[str] = None
 
 class FoodLogInDBBase (FoodLogBase):
    id: int
@@ -25,6 +26,7 @@ class FoodLogUpdate (FoodLogBase):
     fats: float
     serving_unit: str
     serving_weight_grams: int
+    food_name: str
 
 
 class FoodLogSchema(FoodLogInDBBase):

@@ -13,7 +13,7 @@
 
 
 ALTER TABLE food_logs
-DROP COLUMN water;
+ADD COLUMN food_name VARCHAR;
 
 
 

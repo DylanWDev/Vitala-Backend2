@@ -1,2 +1,2 @@
-Delete from food_logs
-Where date_logged is null 
+ALTER TABLE users
+ADD COLUMN health_goals VARCHAR
