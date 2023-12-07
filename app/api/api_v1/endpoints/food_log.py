@@ -17,7 +17,6 @@ def create_food_log(
     return result
 
 
-
 @router.get('/all_food_logs', response_model=List[schemas.FoodLogSchema])
 def read_food_log(
         db: Session= Depends(deps.get_db),
@@ -34,7 +33,7 @@ def get_my_food_logs(
     *,
     db: Session = Depends(deps.get_db),
     user_id: int,
-    # current_user: models.User = Depends(deps.get_current_active_user)
+    current_user: models.User = Depends(deps.get_current_active_user)
 ) -> List[schemas.FoodLogSchema]:
     """
     Update specific information for the user without authentication.

@@ -23,6 +23,17 @@ class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate])
         db.add(food_log_obj)
         db.commit()
         db.refresh(food_log_obj)
+        # add user_id to user_to_foods
+        # how do i connect the two user_id and food_logs.id
+
+        user_to_foodlogs = UsersToFoods(
+            user_id=obj_in.user_id,
+            food_id=food_log_obj.id
+        )
+        db.add(user_to_foodlogs)
+        db.commit()
+        db.refresh(user_to_foodlogs)
+        
         return food_log_obj
     
 
