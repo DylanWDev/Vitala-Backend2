@@ -18,12 +18,11 @@ class FoodLog(Base):
     carbs: Mapped[float] = mapped_column(Float, index=True)
     fats: Mapped[float] = mapped_column(Float, index=True)
     serving_unit: Mapped[str] = mapped_column(VARCHAR, index=True)
-    serving_weight_grams: Mapped[int] = mapped_column(Integer, index=True)
+    serving_weight_grams: Mapped[float] = mapped_column(Float, index=True)
     food_name: Mapped[str] = mapped_column(String, index=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
 
-    food: Mapped[List["UsersToFoods"]] = relationship(back_populates="pivot")
-
-
+    food = relationship("UsersToFoods", back_populates="foodlog")
 
     def to_schema(self):
         return FoodLogSchema(
@@ -37,5 +36,6 @@ class FoodLog(Base):
             fats=self.fats,
             serving_unit=self.serving_unit,
             serving_weight_grams=self.serving_weight_grams,
-            food_name=self.food_name
+            food_name=self.food_name,
+            user_id = self.user_id
         )

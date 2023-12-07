@@ -1,19 +1,11 @@
 -- DROP TABLE "alembic_version";
-
--- DROP TABLE "food_log";
-
+-- DROP TABLE "users_to_foods";
 -- DROP TABLE "tokens";
+-- DROP TABLE "food_logs";
+-- DROP TABLE "users";
 
--- UPDATE food_logs SET meal_type int
+-- DELETE FROM food_logs
 
--- WHERE users.id = 4;
-
-
-
-
-
-ALTER TABLE food_logs
-ADD COLUMN food_name VARCHAR;
-
-
-
+-- WHERE food_name IS NULL;
+-- UPDATE users SET is_superuser = true
+-- WHERE users.id = 2;

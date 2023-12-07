@@ -191,3 +191,10 @@ def register_user(*, db: Session = Depends(deps.get_db),
         "token_type": "bearer",
         "user_id": str(new_user.id)
     }
+
+
+#=====================================================================
+#my user route
+
+# main.py or your router file
+

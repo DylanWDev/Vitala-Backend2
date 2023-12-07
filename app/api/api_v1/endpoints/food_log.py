@@ -17,7 +17,8 @@ def create_food_log(
     return result
 
 
-@router.get('/', response_model=List[schemas.FoodLogSchema])
+
+@router.get('/all_food_logs', response_model=List[schemas.FoodLogSchema])
 def read_food_log(
         db: Session= Depends(deps.get_db),
         skip: int = 0,
@@ -26,6 +27,23 @@ def read_food_log(
     
     result = controllers.flc.get_multi(db, skip=skip, limit=limit)
     return result
+
+
+@router.get("/get_my_food_logs", response_model=List[schemas.FoodLogSchema])
+def get_my_food_logs(
+    *,
+    db: Session = Depends(deps.get_db),
+    user_id: int,
+    # current_user: models.User = Depends(deps.get_current_active_user)
+) -> List[schemas.FoodLogSchema]:
+    """
+    Update specific information for the user without authentication.
+    """
+    user_food_logs = controllers.user.get_my_food_logs(db, user_id=int(user_id))
+   
+    if not user_food_logs:
+        raise HTTPException(status_code=404, detail="FoodLogs not found for " + str(user_id))
+    return user_food_logs
 
 
 @router.delete("/{food_log_id}", response_model=schemas.FoodLogSchema)
@@ -81,3 +99,4 @@ def update_food_log_partial(
     db.refresh(existing_food_log)
 
     return existing_food_log
+

@@ -13,5 +13,5 @@ class UsersToFoods(Base):
         user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
         food_id: Mapped[int] = mapped_column(ForeignKey("food_logs.id"))
 
-        users: Mapped[List["User"]] = relationship(back_populates="pivot")
-        pivot: Mapped[List["FoodLog"]] = relationship(back_populates="food")
+        user = relationship("User", back_populates="foodlogs")
+        foodlog = relationship("FoodLog", back_populates="food")

@@ -1,7 +1,10 @@
 from typing import Any, Dict, Optional, Union
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.core.security import get_password_hash, verify_password
 from app.models.user import User
+from app.models.food_log import FoodLog
+from app.models.user_to_foods import UsersToFoods
 from app.schemas.user import UserCreate, UserUpdate
 from app.controllers.BaseController import BaseController
 
@@ -48,5 +51,11 @@ class UserController(BaseController[User, UserCreate, UserUpdate]):
     def is_superuser(self, user: User) -> bool:
         return user.is_superuser
 
+    def get_my_food_logs(self, db: Session, *, user_id: int):
+
+        results = db.query(FoodLog)\
+            .join(UsersToFoods, UsersToFoods.food_id == FoodLog.id)\
+            .where(UsersToFoods.user_id==int(user_id)).all()
+        return results
 
 user = UserController(User)

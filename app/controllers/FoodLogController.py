@@ -1,7 +1,8 @@
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app.models import FoodLog
-from app.schemas import FoodLogSchema, FoodLogInDBBase, FoodLogUpdate
+from app.models import FoodLog, UsersToFoods
+
+from app.schemas import FoodLogInDBBase, FoodLogUpdate
 from app.controllers.BaseController import BaseController
 
 class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate]):
@@ -16,8 +17,8 @@ class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate])
             fats = obj_in.fats,
             serving_unit=obj_in.serving_unit,
             serving_weight_grams=obj_in.serving_weight_grams,
-            food_name=obj_in.food_name
-
+            food_name=obj_in.food_name,
+            user_id=obj_in.user_id
         )
         db.add(food_log_obj)
         db.commit()
@@ -25,6 +26,17 @@ class FoodLogController(BaseController[FoodLog, FoodLogInDBBase, FoodLogUpdate])
         return food_log_obj
     
 
+    
+    def get_food_logs_for_user(self, db: Session, user_id: int):
+        # Query to get all food logs for a specific user
+        user_food_logs = (
+            db.query(FoodLog)
+            .join(UsersToFoods, UsersToFoods.food_id == FoodLog.id)
+            .filter(UsersToFoods.user_id == user_id)
+            .all()
+        )
+
+        return user_food_logs
     
     
 flc = FoodLogController(FoodLog)

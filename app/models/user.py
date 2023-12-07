@@ -20,7 +20,7 @@ class User(Base):
     activity_level = Column(Integer, index=True)
     health_goals = Column(String, index=True)
 
-    pivot: Mapped[List["UsersToFoods"]] = relationship(back_populates="users")
+    foodlogs = relationship("UsersToFoods", back_populates="user")
 
     relationship()
 

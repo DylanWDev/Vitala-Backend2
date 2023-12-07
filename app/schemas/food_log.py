@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 class FoodLogBase(BaseModel):
@@ -11,8 +11,9 @@ class FoodLogBase(BaseModel):
     carbs: Optional[float] = None
     fats: Optional[float] = None
     serving_unit: Optional[str] = None
-    serving_weight_grams: Optional[int] = None
+    serving_weight_grams: Optional[float] = None
     food_name: Optional[str] = None
+    user_id: int
 
 class FoodLogInDBBase (FoodLogBase):
    id: int
@@ -31,7 +32,7 @@ class FoodLogUpdate (FoodLogBase):
 
 class FoodLogSchema(FoodLogInDBBase):
 
-   class Config:
-      from_attributes = True
+    class Config:
+        from_attributes = True
 
-      populate_by_name = True
+        populate_by_name = True
