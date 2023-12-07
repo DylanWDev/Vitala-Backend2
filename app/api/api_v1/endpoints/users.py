@@ -1,6 +1,6 @@
 from typing import Any, List, Annotated
 
-from fastapi import APIRouter, Body, Depends, HTTPException, Form
+from fastapi import APIRouter, Body, Depends, HTTPException, Form, status
 from fastapi.encoders import jsonable_encoder
 from pydantic.networks import EmailStr
 from sqlalchemy.orm import Session
@@ -114,6 +114,7 @@ def create_user_open(
     return new_user
 
 
+
 @router.get("/{user_id}", response_model=schemas.User)
 def read_user_by_id(
     user_id: int,
@@ -139,7 +140,7 @@ def update_user(
     db: Session = Depends(deps.get_db),
     user_id: int,
     user_in: schemas.UserUpdate,
-    current_user: models.User = Depends(deps.get_current_active_superuser),
+    # current_user: models.User = Depends(deps.get_current_active_superuser),
 ) -> Any:
     """
     Update a user.
@@ -152,6 +153,44 @@ def update_user(
         )
     user = controllers.user.update(db, db_obj=user, obj_in=user_in)
     return user
+
+
+
+
+
+    # Update only the specified fields
+    update_data = user_in.dict(exclude_unset=True, exclude={"email", "is_active", "is_superuser", "username", "password"})
+
+    user = controllers.user.update(db, db_obj=user, obj_in=update_data)
+    return user
+
+#!==========================================================================
+
+@router.put("/data/{user_id}", response_model=schemas.User)
+def update_user_data_partial(
+    user_id: int,
+    column_name: str,  
+    column_value: Any,  
+    db: Session = Depends(deps.get_db),
+) -> Any:
+    user_data = controllers.user.get(db, id=user_id)
+    if user_data is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Food Log with id {user_id} not found",
+        )
+
+    
+    setattr(user_data, column_name, column_value)
+
+    db.commit()
+    db.refresh(user_data)
+
+    return user_data
+
+
+#!==========================================================================
+
 
 @router.post("/register")
 def register_user(*, db: Session = Depends(deps.get_db), 
